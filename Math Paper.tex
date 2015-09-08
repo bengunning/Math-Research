@@ -1,0 +1,334 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{verbatim}
+
+\setlength\parindent{0pt}
+
+\title{\textbf{\Large{On Higher Dimensional Games}} \\ \large{\textbf{Necessary and Sufficient Conditions for Equilibria}}}
+\author{Ben Gunning}
+\date{\today}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+\maketitle
+
+
+
+\section*{Abstract}
+Game theory is a field of mathematics that utilizes mathematical modeling to analyze and optimize decisionmaking in a strategic setting involving multiple parties. Game theory has extensive applications in a myriad of fields from economics and business to logic and psychology. A significant question that game theory
+seeks to address is the when do optimal strategies exist and what are said strategies. This paper examines various answers to this question that have developed over the last century. The paper covers a number of theorems relating to these questions from a mathematical perspective.
+
+\section{Introduction to Games}
+
+\begin{definition}[Game]
+A \emph{normal game} is an $n$-dimensional, $a_1$ by $a_2$ by $...$ by $a_n$ array $A$ equipped with $n$ sets $\Sigma_i = [\sigma_{i_1} , ... , \sigma_{i_{a_i}}]$ and a function $\mu:A \rightarrow \mathbb{R}^n$.
+
+The game is said to have $n$ \emph{players}.
+
+The sets $\Sigma_1 , ... , \Sigma_n$ are called the sets of \emph{pure strategies} for each player. $\sigma_{i_j} \in \Sigma_i$ is called a \emph{pure strategy} for player $i$.
+
+The function $\mu$ is called the \emph{payoff function}. For any vector $x$ in the range of $\mu$, the value $x_i$ is called the \emph{payoff} for player $i$.
+\end{definition}
+
+In essence, there are two noteworthy components to a game: strategies and payoffs.
+
+
+
+\subsection{Strategies}
+
+Strategies represent the possible decisions available to each of the players in a particular game. Strategies can be as simple as the decision to play rock, paper, or scissors, or as complex as a tree diagram mapping out all of a player's responses to any possible set of circumstances and moves by other players.
+It is important, however, to note that a player's strategy must function independently from the strategies employed by other players. In other words, one player should not be able to change their strategy after other players have declared their respective strategies. This varied complexity enables us to treat even
+sequential games (games where players take turns making moves) as simultaneous games, which are easier to model mathematically.
+
+Before we proceed, there is a crucial distinction to observe between pure strategies and mixed strategies. Pure strategies are the sorts of strategies described above, while mixed strategies are defined below.
+
+\begin{definition}[Mixed Strategy]
+Consider a game with matrix $A$, payoff function $\mu$, and $n$-many players and sets of pure strategies. Let player $i$ be a player with pure strategies $\sigma_1 , ... , \sigma_m$.
+A \emph{mixed strategy} is a vector $\lambda = [\lambda_1 , ... , \lambda_m]$ such that:
+\begin{enumerate}
+	\item{For any $i \in [1,m]$ , $\lambda_i \geq 0$ , and}
+	\item{$\sum_{i=1}^m \lambda_i = 1$.}
+\end{enumerate}
+\end{definition}
+
+A mixed strategy is a probability vector that represents the probabilities of a given player choosing each of the player's pure strategies. A pure strategy could be represented as a mixed strategy where one of the terms $\lambda_i = 1$.
+Note that while the sets of pure strategies are defined to be finite, the sets of mixed strategies available to a player are, in fact, infinite. Thus, while pure strategies are discrete, mixed strategies exist on a continuum.
+
+
+
+\subsection{Payoffs}
+
+Payoffs are supposed to represent each player's motivations in a particular game. In order for payoffs to accurately reflect and predict rational behavior and optimal strategies, it is essential that the payoffs reflect \emph{all} of a player's motivations. An example of this necessity could be the prisoner's dilemma.
+A traditional example of game theory in action, the prisoner's dilemma predicts that each player will always defect, but that is not always the case in real life. This is because the prisoner's dilemma does not always reflect the entirety of a player's motivations. It could neglect, for instance, coercion, concern for reputation,
+and other external motivations that influence an individual's decision.
+
+With respect to payoffs, there is a particular class of games known as \emph{zero-sum games}. This type of game is defined by the payoffs for all players involved, and the definition can be found below.
+
+\begin{definition}[Zero-Sum]
+A game is said to be \emph{zero-sum} if for any payoff vector $x$ in the range of $\mu$, the sum of all players' payoffs is 0. Equivalently, $\forall x \in \mu(A)$:
+\[
+\sum_{i=1}^n x_i = 0
+\]
+\end{definition}
+
+
+
+\section{Equilibria}
+
+The fundamental question that game theory seeks to address is this: Given a particular game, what is the optimal strategy (either pure or mixed) for any player? Does such a strategy even exist? By optimal, we mean a strategy that maximizes a player's expected payoff value against the possible strategies available
+to the other players in the game. To this end, we define the notions of a counter and an equilibrium.
+
+\begin{definition}[Counter]
+In a game with $n$-many players, let the sets $S_1 , ... , S_n$ denote the sets of mixed strategies available to each player. Also, let the functions $\mu_i: A \rightarrow \mathbb{R}$ take any set of strategies to the resulting payoff for player $i$.
+A strategy $\sigma_i \in S_i$ available to player $i$ is a \emph{counter} to an $(n-1)$-tuple of strategies $[\sigma_1 , ... , \sigma_{i-1} , \sigma_{i+1} , ... , \sigma_n]$ (where any $\sigma_j$ is a strategy available to player $j$) if the following inequality holds:
+\[
+\forall s \in S_i \quad \mu_i(\sigma_1 , ... , \sigma_{i-1} , s , \sigma_{i+1} , ... , \sigma_n) \leq \mu_i(\sigma_1 , ... , \sigma_{i-1} , \sigma_i , \sigma_{i+1} , ... , \sigma_n)
+\]
+\end{definition}
+
+\begin{definition}[Equilibrium]
+An $n$-tuple of strategies $[\sigma_1 , ... , \sigma_n]$ is called an \emph{equilibrium} for the game if each of the strategies in the $n$-tuple is a counter to the corresponding $(n-1)$-tuple.
+\end{definition}
+
+It is not immediately clear from these definitions if an equilibrium necessarily exists for any game. The Von Neumann Minimax Theorem (1928) is one of the earliest proofs of the existence of an equilibrium when certain conditions are met. The proof given here will first prove a more general result,
+the Sion Minimax Theorem (1958), and then apply the result to prove the Von Neumann Minimax Theorem.
+
+\begin{theorem}[General Minimax Theorem]
+Let $X$ be a Hausdorff topological space, and let $Y$ be a vector space. Let $K \subset X$ be compact and convex, and let $C \subset Y$ be convex. Finally, define a function $f: K\ \emph{x}\ C \rightarrow \mathbb{R}$ satisfying the following two properties:
+\begin{enumerate}
+	\item{$\forall y \in C$ the function $f_y: K \rightarrow \mathbb{R} | f_y(x) = f(x,y)\ \forall x \in K$ is convex and lower-semicontinuous}
+	\item{$\forall x \in K$ the function $f_x: C \rightarrow \mathbb{R} | f_x(y) = f(x,y)\ \forall x \in C$ is concave}
+\end{enumerate}
+Then
+\[inf_{x \in K} sup_{y \in C} f(x,y) = sup_{y \in C} inf_{x \in K} f(x,y)\]
+\end{theorem}
+
+\begin{proof}
+To prove this equality, we shall prove two inequalities.
+\begin{itemize}
+	\item{\textbf{$inf_{x \in K} sup_{y \in C} f(x,y) \geq sup_{y \in C} inf_{x \in K} f(x,y)$ :}\\ Let $a,c \in K$ and $b,d \in C | f(a,b) = inf_{x \in K} sup_{y \in C} f(x,y)\ \textrm{and}\ f(c,d) = sup_{y \in C} inf_{x \in K} f(x,y)$.
+		Since $f(a,b)$ is the supremum of $f_a$ on $C$, then $f(a,b) = f_a(b) \geq f_a(d) = f(a,d)$.
+		Similarly, since $f(c,d)$ is the infimum of $f_d$ on $K$, then $f(c,d) = f_d(c) \leq f_d(a) = f(a,d)$.
+		Hence, $f(a,b) \geq f(a,d) \geq f(c,d)$, so the inequality holds.
+	}
+	\item{\textbf{$inf_{x \in K} sup_{y \in C} f(x,y) \leq sup_{y \in C} inf_{x \in K} f(x,y)$ :}\\ To prove this fact, it suffices to prove that if $M \in \mathbb{R} \geq sup_{y \in C} inf_{x \in K} f(x,y)$, then $\forall \epsilon > 0$ $inf_{x \in K} sup_{y \in C} f(x,y) \leq M + \epsilon$.
+		Our assumption on $M$ means that $M \geq inf_{x \in K} f(x,y)$ $\forall y \in C$. Therefore, $\forall y \in C$ the set $K_y := \{x \in K | f(x,y) \leq M + \epsilon\} \neq \emptyset$. Furthermore, the set is compact and convex because of our assumption that $\forall y \in C$
+		$f_y$ is convex and lower-semicontinuous on $K$.
+
+		Let $g := f - (M + \epsilon)$ , and note that $inf_{x \in K} g(x,y) \leq -\epsilon$, and for each $y \in C$ let $g_y := f_y - (M + \epsilon)$.
+		For each $y \in C$ $K_y = \{x \in K | g(x,y) \leq 0\}$ by our definition of $K_y$. Consider $y_0 \subset C | y_0 = \{y_1,y_2\}$. We now proceed with a proof by contradiction to demonstrate that $K_{y_1} \cap K_{y_2} \neq \emptyset$.
+
+		Suppose that $K_{y_1} \cap K_{y_2} = \emptyset$. We will have a contradiction if we can find $\alpha \in [0,1] | (1-\alpha)g_y1(x) + \alpha g_y2(x) \geq 0$ $\forall x \in K$. This is because $g$ is concave, so this result would yield a $y_\alpha := (1-\alpha)y_1 + \alpha y_2$ for which
+		$inf_{x \in K} g_{y_\alpha}(x) \geq 0$.
+
+		When we strive to find a suitable $\alpha$, we need only consider $x \in K_{y1} \cup K_{y2}$. When $x \notin$ this union, $g_{y1}(x) > 0\ \textrm{and}\ g_{y2}(x) > 0$, so the inequality holds for all choices of $\alpha$. For $x \in K_{y1}$ we need:
+		\[
+			\alpha \geq sup_{x_1 \in K_{y_1}} \frac{-g_{y_1}(x_1)}{g_{y2}(x_1) - g_{y1}(x_1)} \geq 1
+		\]
+	
+		In order for the inequality hold for $x \in K_{y2}$ we need:
+		\[
+			\alpha \leq inf_{x_2 \in K_{y_2}} \frac{g_{y_1}(x_2)}{g_{y1}(x_2) - g_{y2}(x_2)} \leq 1
+		\]
+
+		Therefore, $\exists \alpha$ satisfying our conditions if and only if:
+		\[
+			\frac{-g_{y1}(x_1)}{g_{y2}(x_1) - g_{y1}(x_1)} \leq \frac{g_{y1}(x_2)}{g_{y1}(x_2) - g_{y2}(x_2)} \quad \forall x_1 \in K_{y1} \forall x_2 \in K_{y2}
+		\]
+
+		This is equivalent to the inequality:
+		\[
+			(-g_{y1}(x_1))(-g_{y2}(x_2)) \leq g_{y1}(x_2)g_{y2}(x_1) \quad \forall x_1 \in K_{y1} \forall x_2 \in K_{y2}
+		\]
+
+		This is trivial in the case when $g_{y1}(x_1) = 0\ \textrm{or}\ g_{y2}(x_2) = 0$, so we need only concern ourselves with the case when $g_{y1}(x_1) < 0\ \textrm{and}\ g_{y2}(x_2) < 0$. Let $\theta$ denote the value satisfying $(1-\theta)g_{y1}(x_1) + \theta g_{y1}(x_2) = 0$, and let
+		$x_\theta := (1-\theta) x_1 + \theta x_2$. By convexity, $g_{y1}(x_\theta) \leq 0$, so $x_\theta \in K_{y1}$ and $(1-\theta)g_{y2}(x_1) + \theta g_{y2}(x_2) \geq g_{y2}(x_\theta) > 0$. Consequently, $\frac{-g_{y1}(x_1)}{g_{y1}(x_2)} = \frac{\theta}{1-\theta} < \frac{g_{y2}(x_1)}{-g_{y2}(x_2)}$.
+		This proves the existence of a satisfactory $\alpha$. This yields the aforementioned contradiction, so we may conclude that $K_{y1} \cap K_{y2} \neq \emptyset$.
+
+		We may extend this result by induction to any intersection $\cap_{y \in Y_0}K_y$ for any finite subset $Y_0 \subset C$ to show that $\cap_{y \in Y_0}K_y \neq \emptyset$. This process simply involves the repetition of pairwise arguments on $f$ for any two elements of the subset. By compactness,
+		this result is sufficient to conclude that $\cap_{y \in C} K_y \neq \emptyset$.
+
+		This means that $\exists x_0 \in \cap_{y \in C} K_y$. Therefore, $\forall y \in C$ $f(x_0,y) \leq M + \epsilon$. This implies that $sup_{y \in C} f(x_0 , y) \leq M + \epsilon$. This proves the inequality that we seek.
+	}
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[Von Neumann Minimax Theorem]
+Given a two-player, zero-sum game with $m$ by $n$ payoff matrix $A$, sets of pure strategies $\Sigma$ and $T$, and sets of mixed strategies $X$ and $Y$,
+\[max_{x \in X} min_{\tau \in T} xA_j = min_{y \in Y} max_{\sigma \in \Sigma} A_i y^T\]
+where $i$ is the index of $\sigma$ in $\Sigma$, $j$ is the index of $\tau$ in $T$, $A_i$ is the $i$-th row of $A$, and $A_j$ is the $j$-th column of $A$.
+\end{theorem}
+
+\begin{proof}
+In order for Sion's Minimax Theorem to apply, we must prove the following (some of these conditions are stronger than necessary):
+\begin{itemize}
+	\item{The sets of mixed strategies, $X$ and $Y$, are subsets of Hausdorff spaces:
+
+		$X$ and $Y$ are subsets of $\mathbb{R}^m$ and $\mathbb{R}^n$ respectively. Both spaces are Hausdorff when we equip the standard topology on the real numbers, so this condition holds.
+	}
+	\item{The sets of mixed strategies, $X$ and $Y$ are compact and convex subsets of their respective vector spaces:
+
+		Clearly $X$ and $Y$ are bounded, as the distance between any vector in $X$ and the origin is bounded above by $\frac{1}{\sqrt{m}}$. Similarly, the distance between a vector in $Y$ and the origin is bounded above by $\frac{1}{\sqrt{n}}$.
+
+		For closedness, we note that $X$ is the intersection of the sets $X_i \subset \mathbb{R}^m := \{v \in \mathbb{R}^m | v_i \geq 0\}$ and $X* \subset \mathbb{R}^m := \{v \in \mathbb{R}^m | v_1 + ... + v_m = 1\}$, each of which is closed. A similar intersection defines $Y$, so both of these sets are the
+		intersections of closed sets, proving that they are both closed themselves.
+
+		Finally, we can prove convexity for $X$. An almost identical proof holds for $Y$ as well. Fix $a,b \in X$, and let $t$ be a real number in the range $[0,1]$. We now consider the point $c = (1-t)a + tb$. For any $i \in [1,m]$, $c_i = (1-t)a_i + tb_i$, which clearly lies in the interval $[0,1]$. Furthermore:
+		\[
+			\sum_{i=1}^m c_i = \sum_{i=1}^m (1-t)a_i + \sum_{i=1}^m tb_i = (1-t) * \sum_{i=1}^m a_i + t * \sum_{i=1}^m b_i = 1-t+t = 1
+		\]
+		Therefore, $c \in X$, proving the convexity of our two sets. We've now shown that $X$ and $Y$ are both compact and convex.
+	}
+	\item{The payoff function is continuous on $X$:
+
+		Fix a mixed strategy $y \in Y$. Let $x$ be a mixed strategy in $X$ and let $\epsilon > 0$ be real. Note that for arbitrary pure strategies $\sigma_i$ and $\tau_j$, the value $a_{ij} \in A$ denotes the payoff for player 1. Hence, the expected payoff for player 1 using mixed strategy $x$ against $y$ is:
+		\[
+			\sum_{i=1}^m \sum_{j=1}^n x_i y_j a_{ij} = \sum_{i=1}^m (x_i \sum_{j=1}^n y_j a_{ij})
+		\]
+		Now let $a := max a_{ij}$ for all values of $i,j$. Let $\delta := \frac{\epsilon}{mna}$ and consider $B_\delta(x)$, the open ball of radius $\delta$ about $x$. If $v \in B_\delta(x)$, then the following inequality holds:
+		\[
+			|\mu(x) - \mu(v)| <  \sum_{i=1}^m (\delta \sum_{j=1}^n y_j a_{ij}) \leq \sum_{i=1}^m \delta n a = \epsilon
+		\]
+		Hence, the payoff function is continuous on $X$.
+	}
+\end{itemize}
+This proves that a two-player, zero-sum game with mixed strategies satisfies the requirements for the Sion Minimax Theorem to apply.
+\end{proof}
+
+The Von Neumann Minimax Theorem proves the existence of an equilibrium in two-person, zero-sum games. An informal statement of the result is that one player's best strategy to minimize the other player's maximum gain will result in the same payoff as the other player's best strategy to maximize their own
+minimum gain. The theorem further proves the uniqueness of the expected payoff value when both players employ optimal mixed strategies.
+
+
+
+\section{Nash's Existence Theorem}
+Von Neumann's Minimax Theorem says nothing about games with three or more players. However, in 1949, John Nash generalized the result of Von Neumann's theorem to games of $n$-many players. In order to prove his result, we must first state and prove the Brouwer Fixed Point Theorem by use of the following lemma.
+
+\begin{lemma}
+Let $B \subset \mathbb{R}^n$ denote the closure of the unit ball, and let $S \subset \mathbb{R}^{n-1}$ denote the unit sphere (the boundary of $B$). There does not exist a $C^1$ function $f: B \rightarrow S | f(x) = x$ for all $x \in S$.
+\end{lemma}
+
+\begin{proof}
+We proceed with a proof by contradiction. Suppose the existence of such a function $f$. Then let $f_t(x) = (1-t)x + tf(x) = x + tg(x)$ for all $t \in [0,1]$, where $g(x) = f(x) - x$. Observe that $f_t$ maps $B$ onto itself because of the following inequality:
+\[
+	\forall x \in B\ ||f_t(x)|| \leq ||(1-t)x|| + ||tf(x)|| = (1-t)||x|| + t||f(x)|| \leq (1-t) + t = 1
+\]
+Furthermore, for all values $x \in S$
+\[
+	f_t(x) = (1-t)x + tf(x) = (1-t)x + tx = x.
+\]
+Consequently, all values in $S$ are fixed points with respect to $f_t$. We now turn our attention to the function $g$. Since $g$ is the sum of two $C^1$ functions, then $g$ is $C^1$ as well. Therefore:
+\[
+	\exists C \in \mathbb{R}\ \forall x_1,x_2 \in B\ ||g(x_1) - g(x_2)|| \leq C||x_1 - x_2||.
+\]
+Suppose that $x_1,x_2 \in B$ are distinct and $f_t(x_1) = f_t(x_2)$. Then $x_2 - x_1 = t(g(x_2)-g(x_1))$, so
+\[
+	||x_2 - x_1|| = t||g(x_2) - g(x_1)|| \leq Ct||x_2 - x_1||.
+\]
+Therefore, $Ct \leq 1$. It follows that when $t < \frac{1}{C}$, the function $f_t$ is injective, since there cannot exist $x_1 \neq x_2 | f_t(x_1) = f_t(x_2)$.
+
+Next consider the derivative of $f_t$ with respect to $x$. Since $f_t(x) = x + tg(x)$, then $f_t': \mathbb{R}^n \rightarrow \mathbb{R}^n | f_t' = I + tg'$. Here, $I$ represents the identity on $\mathbb{R}^n$ and $g'$ represents the derivative of $g$, which exists because $g$ is $C^1$.
+
+Consider the determinants of the functions $f_t'$ for all $t \in [0,1]$. $f_0' = I$, so $det\ f_0'(x) > 0$. Furthermore, since $g$ is a $C^1$ function, there is a value $t_0 \in [0,1]$ such that $det\ f_t'(x) > 0\ \forall t \in [0,t_0]$.
+
+Now let $G_t$ denote the image of the interior of $B$ with respect to $f_t$. The Inverse Function Theorem tells us that because the interior of $B$ is open, then for all $t \in [0,t_0]$ $G_t$ is an open set. We claim that for all $t$ in this range, $G_t$ is equal to the interior of $B$. We prove this with a proof by contradiction.
+
+If we assume $G_t \neq Int(B)$, then $\partial G_t \cap Int(B) \neq \emptyset$. Let $y_0 \in \partial G_t \cap Int(B)$. Since $y_0 \in G_t$, then by our definition of $G_t$, there is a sequence $\{x_l\} \in Int(B)\ |\ lim_{l \rightarrow \infty} f_t(x_l) = y_0$.
+
+Since $B$ is compact, there exists $x_0 \in B$ such that $lim_{l \rightarrow \infty}x_l = x_0$. Furthermore, since $f$ is continuous, $f_t(x_0) = y_0$. However, $y_0 \in \partial G_t$ and $G_t$ is open, so $y_0 \notin G_t$. Therefore, $x_0 \notin Int(B)$. So $x_0 \in S$. But $f_t(x_0) = x_0$ because $x_0 \in S$. This implies
+that $y_0 = x_0$, so $y_0 \in S$. This is a contradiction of our claim that $y_0 \in Int(B)$. Hence, for all $t \in [0,t_0]$ the function $f_t$ is a bijection.
+
+Next, consider the function
+\[
+	F(t) = \int_B det f_t'(x)dx = \int_B det(I + tg'(x))dx
+\]
+By the Change of Variables formula for multiple integrals, $F(t)$ gives the volume of the image of $f_t$ on $B$, which is defined to be $B$. Therefore, $F(t)$ is constant (equal to $Vol(B)$) on the interval $[0,t_0]$. A polynomial that is constant on an interval is a constant function, so $F(t) = Vol(B)$ on the interval $[0,1]$.
+
+In particular, $F(1) = Vol(B) > 0$. However, $f_1(x) = f(x) \in S$ for all $x$. Therefore, $<f_1(x) , f_1(x)> = ||f_1(x)||^2 = 1$. It follows that
+\[
+	\forall v \in \mathbb{R}^n\ 2<f_1'(x)v , f_1(x)> = \frac{d}{dt}<f_1(xt + tv) , f_1(x+tv)>|_{t=0} = \frac{d}{dt}1 = 0
+\]
+Thus, the range of $f_1'$ is contained in $f$'s orthogonal complement. However, the rank of $f_1' \leq n-1$ for all $x \in B$. Then $det\ f_1'(x) = 0$ for all $x \in B$. Since $F(1) = \int_B det\ f_1'(x)dx = 0$, we have a contradiction of the assertion that $F(1) > 0$, completing the proof by contradiction for the lemma.
+\end{proof}
+
+\begin{lemma}[Brouwer Fixed Point Theorem]
+Let $K \subset \mathbb{R}^n$ be a compact and convex subset, and let $f:K \rightarrow K$ be a continuous function. There exists a fixed point of $f$, a point $x \in K$ such that $f(x) = x$.
+\end{lemma}
+
+\begin{proof}
+It is sufficient to show that this result holds for the closure of the unit ball. Let $B \subset \mathbb{R}^n$ denote the closure of the unit ball and define a continuous function $f:B \rightarrow B$. By the Stone-Weierstrass Theorem, there is a sequence of $C^1$ functions $p_l: B \rightarrow \mathbb{R}^n$ such that for each
+$x \in B$ $||f(x) - p_l(x)|| \leq \frac{1}{l}$. Therefore, $||p_l(x) \leq ||f(x)|| + ||p_l(x) - f(x)|| \leq 1 + \frac{1}{l}$. If we define $h_l = (1 + \frac{1}{l})^{-1}p_l$, then $h_l$ converges to $f$ uniformly.
+
+The claim of this theorem is that each $h_l$ has a fixed point in $B$. Suppose that some $h_l$ has no fixed point in $B$. Then we let $f_l: B \rightarrow \partial B$ be defined so that for each $x \in B$ $f_l(x)$ denotes the intersection of $\partial B$ with the ray from $h_l(x)$ to $x$. Without some fixed point in $B$ with
+respect to $h_l$, $f_l$ is a $C^1$ function. $f_l$ also has the property that for all $x \in \partial B$, $f_l(x) = x$. This is a contradiction of the previous lemma, proving that each $h_l$ has a fixed point.
+
+Due to the compactness of $B$, we may construct a sequence $\{x_l\}$ where each $x_l$ is a fixed point of $h_l$. There exists some $x_0$ in $B$ such that this sequence of values $x_l$ converges to $x$. Since $h_l$ converges uniformly to $f$, $f(x_0) = x_0$, proving the existence of a fixed point in $B$.
+\end{proof}
+
+The Brouwer Fixed Point Theorem gives us a basis for the proof of Nash's Existence Theorem, a result that proves the existence of equilibria in games with finitely many players and pure strategies, so long as mixed strategies are permitted.
+
+\begin{theorem}[Nash's Existence Theorem]
+Every game has at least one equilibrium if it satisfies the following conditions:
+\begin{itemize}
+	\item{There is a finite number of players.}
+	\item{Each player has a finite number of available pure strategies.}
+	\item{Mixed strategies are permitted.}
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Consider a game with $n$ many players, where each player $i$ has a finite set of pure strategies $A_i$. Let $\mu$ be the payoff function, where each $\mu_i$ gives the payoff for player $i$. First, observe that, as previously demonstrated, the sets of mixed strategies for each player are convex and compact.
+
+We may now define a function $\phi_{i,\alpha_i}$ for each player $i$ and each $\alpha_i \in A_i$, which acts on the set, $S$, of $n$-tuples $s$ consisting of a single pure strategy for each player. Let $\phi_{i,\alpha_i}$ be the maximum of 0 and the difference between the payoff for player $i$ when player $i$ uses
+strategy $a_i$ and all other players use their respective strategies in $s$ and the payoff for player $i$ when all players adhere to the strategies in the $n$-tuple $s$. More formally:
+\[
+	\phi_{i,\alpha_i}: S \rightarrow \mathbb{R} | \phi_{i,\alpha_i}(s) = max\{0,\mu_i(s_1 , ... , s_{i-1} , a_i , s_{i+1} , ... s_n) - \mu(s)\}.
+\]
+As demonstrated earlier, these functions are each continuous. Thus, the composition of these functions has a fixed point in the set of strategy $n$-tuples (by the Brouwer Fixed Point Theorem). If we let $s$ be a fixed point of these functions, no player can benefit by unilaterally deviating from their strategy in $s$, proving
+that the fixed point $s$ is an equilibrium for our game.
+
+This concludes our proof of the existence of an equilibrium for games satisfying the aforementioned conditions.
+\end{proof}
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Holler}
+M. Holler, \textit{Classical, Modern and New Game Theory}, University of Hamburg, 2001.
+
+\bibitem{Howard}
+R. Howard, \textit{The Milnor-Rogers Proof of the Brouwer Fixed Point Theorem}, University of South Carolina, 2004.
+
+\bibitem{Jiang}
+A. Jiang, K. Leyton-Brown, \textit{A Tutorial on the Proof of the Existence of Nash Equilibria}, University of British Columbia, 2007.
+
+\bibitem{Lau}
+L. Lau, \textit{Min-Max Theorem}, 2008.
+
+\bibitem{Nash}
+J. Nash, \textit{Equilibrium Points in n-Person Games}, Princeton University, 1949.
+
+\bibitem{Pollard}
+D. Pollard, \textit{Minimax Theorem}, 2003.
+
+\bibitem{Scarvalone}
+M. Scarvalone, \textit{Game Theory and the Minimax Theorem}.
+
+\bibitem{Sion}
+M. Sion, \textit{On General Minimax Theorems}, Pacific Journal of Mathematics, 1958.
+
+\end{thebibliography}
+
+\end{document}
